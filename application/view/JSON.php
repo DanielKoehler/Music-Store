@@ -1,0 +1,1 @@
+<?php $this->place($json_content); ?>

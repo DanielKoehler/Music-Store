@@ -1,0 +1,44 @@
+/*
+ * Style tweaks
+ * --------------------------------------------------
+ */
+
+body {
+    
+}
+ 
+html {
+    overflow-x: hidden; /* Prevent scroll on narrow devices */
+}
+
+
+footer {
+    padding: 30px 0;
+}
+
+body {
+    padding-top: 51px;
+    padding-bottom: 40px;
+    color:#FFF;   
+   background-color:#333;
+}
+
+.jumbotron {
+    background:#222;    
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+     color:#efefef;  
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #FFF;   
+}
+
+.navbar.navbar-fixed-top.navbar-default {
+    background: #343434;
+    border-bottom: 4px solid;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    background: #222;
+}
