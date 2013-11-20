@@ -11,20 +11,28 @@ class load{
 					}
 					return true;
 				} else {
-					if($pre == true){
+					if($pre === 1){
 						echo "<pre>"; 
 						print_r($data);
 						echo "</pre>";
 						return true;
 					} else {
 						foreach ($data as $key => $value) {
-							$this->place($value);
+							if($pre != false && $pre != true){
+								$this->place($value, $pre); // Suffix
+							} else {
+								$this->place($value);
+							}
 						}
 					}
 					return true;
 				}	
 			}
-			echo $data;
+			if($pre != false && $pre != true){
+				echo $data . $pre;  // Suffix
+			} else {
+				echo $data;
+			}
 		}
 	}
 

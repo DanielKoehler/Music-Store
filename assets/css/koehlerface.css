@@ -1,0 +1,100 @@
+/* Switch element styles ----------- */
+
+.switch {
+    height: 30px;
+    width: 70px;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #8e44ad;
+    position: relative;
+}
+
+
+.switch > div {
+    height: 30px;
+    width: 100%;
+    cursor: pointer;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.switch-off .switch-right {
+	left: 0px;
+}
+.switch-on .switch-right {
+	left:40px;
+	color: #bdc3c7;
+}
+
+.switch-off .switch-left {
+	left: -40px;
+	background: #bdc3c7;
+	color: #fff;
+}
+
+.switch-on .switch-left {
+	left:0;
+}
+
+.switch-left:after, .switch-right:after {
+	content:"";
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	display: inline-block;
+	margin: 5px;
+}
+
+.switch-left:after {
+	background: #ecf0f1;
+	float: right;
+	margin-left: -5px;
+}
+
+.switch-off .switch-left:after {
+	background: #7f8c8d;
+}
+
+.switch-right:after { 
+	float: left;
+	margin-right: -5px;
+}
+
+.switch-left, .switch-right {
+	transition: all 0.4s ease;
+    width: 100%;
+    position: absolute;
+    top:0px;
+    height: 30px;
+    border-radius: 15px;
+    display: inline-block;
+    line-height: 30px;
+   
+} 
+
+.switch-left{
+	background: #9b59b6;
+    color: #ecf0f1;
+    z-index: 20;
+}
+
+.switch-right{
+	color: #fff;
+    background: #bdc3c7;
+    z-index: 10;
+}
+
+.switch input[type="checkbox"] {
+    display: none;
+}
+
+/* Switch element styles ----------- */
+
+.down-arrow .arrow-down {
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #f00;
+}
+
