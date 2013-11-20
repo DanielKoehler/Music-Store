@@ -10,7 +10,6 @@ window.onload = function () {
                 switchContainer.className = 'switch-on';
             }
             var input = switchContainer.getElementsByTagName('input')[0];
-            console.log(switchContainer.className)
         });
     };
 }
