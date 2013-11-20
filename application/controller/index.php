@@ -16,12 +16,17 @@ class index {
  		// Set up <head>
  		$this->page->html->head->configure('page');
 		$this->page->html->head->add('<title>Home Page | Some Store</title>');
+<<<<<<< HEAD
 
 		$this->page->html->head->add('<script type="text/javascript" src="/assets/js/parallax.js"></script>');
 		$this->page->html->head->add('<script type="text/javascript" src="/assets/js/koehlerface.js"></script>');
 		$this->page->html->head->add("<link href='/assets/css/koehlerface.css' rel='stylesheet' type='text/css'>");
 		$this->page->html->head->add("<link href='/assets/css/style.css' rel='stylesheet' type='text/css'>");
 		
+=======
+		$this->page->html->head->add('<script src="/assets/js/parallax.js"></script>');
+		$this->page->html->head->add("<link href='/assets/css/style.css' rel='stylesheet' type='text/css'>");
+>>>>>>> e049e4c4c84e4f173a397fc7ebc450d5dbe21e70
 		$this->page->html->head->add("<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>");
 
 		// Set up top level basic navigation

@@ -5,6 +5,7 @@ body, html, div {
 	background-color: #ecf0f1;
 }
 
+<<<<<<< HEAD
 *.unselectable {
    -moz-user-select: -moz-none;
    -khtml-user-select: none;
@@ -113,3 +114,161 @@ h1.extra-large {
 @mediaonly screen and (-webkit-min-device-pixel-ratio : 1.5),only screen and (min-device-pixel-ratio : 1.5) {
 /* Styles */
 }
+=======
+p {
+    color: #2c3e50;
+}
+
+h1 {
+	color: #8e44ad;
+	font-weight: 100;
+}
+
+h1.large {
+	font-size: 46px;
+	line-height: 1;
+	margin: 10px 0 50px 0;
+}
+
+h1.extra-large {
+	font-size: 60px;
+	margin: 0 0 60px;
+}
+
+.vertical-perent-js-centring{
+	display: table;
+	position: relative;
+	top: 50%;
+	margin-top: -127px !important;
+}
+
+.centre {text-align: center;}
+
+
+
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+/* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+/* Styles */
+    .container {
+        width:980px;
+        margin: 0 auto;
+    }
+
+	.scroller-back-layer-container {
+		width: 100%;
+		height: 420px;
+		overflow: hidden;
+		display: inline-block;
+	}	
+
+	.scroller-background img {
+		width:100%;
+	}
+
+	.scroller-content {
+		height: 320px;
+		padding: 50px 0;
+		width: 100%;
+		text-align: center;
+		position: relative;
+	}
+
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+/* Styles */
+}
+
+/* iPhone 4 ----------- */
+@mediaonly screen and (-webkit-min-device-pixel-ratio : 1.5),only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
+
+.switch {
+    height: 30px;
+    width: 70px;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #8e44ad;
+    position: relative;
+}
+
+
+.switch > div {
+    height: 30px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.switch-off .switch-right {
+
+}
+
+.switch-on .switch-right {
+
+}
+
+
+.switch-off .switch-left:after {
+	content:"";
+	background: #ecf0f1;
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+	display: inline-block;
+	margin: 5px;
+	margin-left: -5px;
+	float: right;
+}
+
+.switch-off .switch-left {
+    width: 100%;
+    height: 30px;
+    border-radius: 15px;
+    display: inline-block;
+    line-height: 30px;
+    background: #9b59b6;
+    color: #ecf0f1;
+} 
+
+.switch-on .switch-left {
+	
+}
+
+.switch input[type="checkbox"] {
+    display: none;
+}
+
+>>>>>>> e049e4c4c84e4f173a397fc7ebc450d5dbe21e70
