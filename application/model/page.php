@@ -73,8 +73,10 @@ class navigation {
 		$this->links = array();
 	}
 	// Navigation Functions
-	function add_link($handle = None, $name, $href, $class = ""){
-		$this->links[$handle] = array("name"=>$name, "href"=>$href,"class" => $class);
+	function add($links = array()){
+		foreach ($links as $link) {
+			$this->links[$link[0]] = array("name"=>$link[1], "href"=>$link[2],"class" =>(!empty($link[3]) ? $link[3] : 'nav link'));
+		}
 	}
 
 	function remove_link($handle){
@@ -84,6 +86,14 @@ class navigation {
 	function activate_link($handle){
 		$this->links[$handle]['class'] = "active";
 	}	
+
+	function render(){
+		$navigation = array();
+		foreach ($this->links as $link) {
+			$navigation[] = '<li class="' . (!empty($link['class']) ? $link['class'] : Null ). '"><a href="' . (!empty($link['href']) ? $link['href'] : Null ). '">' . (!empty($link['name']) ? $link['name'] : Null ). '</a></li>';
+		}
+		return $navigation;
+	}
 	// END Navigation Functions
 }
 class includes {
@@ -132,9 +142,11 @@ class head {
 
 	function render()
 	{
+		$heads = "";
 		foreach ($this->data as $head) {
-			yield $head;
+			$heads .= $head . "\n";
 		} 
+		return $heads;
 	}
 
 	function configure($template)

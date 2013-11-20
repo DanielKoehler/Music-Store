@@ -1,16 +1,9 @@
-<div class="navbar navbar-fixed-top navbar-default" role="navigation">
+<div class="navigation full-column-12">
 	<div class="container">
-		<div class="navbar-header">
-
-		</div>
-		<div class="collapse navbar-collapse">
-			<ul class="nav navbar-nav">
-				<?php
-					foreach ($this->page->navigation->links as $link) {
-						echo '<li class="' . (!empty($link['class']) ? $link['class'] : Null ). '"><a href="' . (!empty($link['href']) ? $link['href'] : Null ). '">' . (!empty($link['name']) ? $link['name'] : Null ). '</a></li>';
-					}
-				?>
-			</ul>
-		</div>
+		<ul class="nav navigation">
+			<?php
+				$this->place($this->page->navigation->render());
+			?>
+		</ul>
 	</div>
 </div>
