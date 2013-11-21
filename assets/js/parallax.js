@@ -1,22 +1,24 @@
 function Parallax(scrollers, imageshift) {
 
 	// Ah the joys of OOP in JavaScipt, let's consider this construct function.
-
-	this.scrollers = [];
 	self = this
-
+	this.scrollers = [];
+	this.imageshift = imageshift; // 500 (px) Suggested (TEMP POSITING BUGFIX)
+	this.tileHeight = 0
 	for (scroller in scrollers) {
 		var element = document.getElementById(scrollers[scroller]);
 		this.scrollers.push({'self':element, 'prior':element.parentNode.previousElementSibling,'next':element.parentNode.nextElementSibling});
+		var height = element.parentNode.clientHeight
+		if(height > this.tileHeight){
+			this.tileHeight = height
+		}
+		element.style.webkitTransform = "translate3d(0px, 0px, 0px)";
 	}
-
-	this.imageshift = imageshift; // 200 (px) Suggested
 }
 
 Parallax.prototype.start =  function()
 {	
-		window.addEventListener('scroll', function (e) {self.mapParallax(e);})
-		window.addEventListener('resize', function (e) {document.getElementById('full-height').style.height = (window.innerHeight - 100) + "px";})
+		window.addEventListener('scroll', function (e) {self.mapParallax(e,0);})
 } 
 
 Parallax.prototype.scrollers =  function()
@@ -24,26 +26,30 @@ Parallax.prototype.scrollers =  function()
 	return this.scrollers
 } 
 
-Parallax.prototype.translateParallax = function(scrollers){
+Parallax.prototype.translateParallax = function(scrollers, useComputered){
 	
 	// Let's do some math's and style updates and let CSS do the rest.
 
 	for (scroller in scrollers){
 
+		if (useComputered){
+			var viewportTop = pageYOffset + Math.abs(window.getComputedStyle(document.body).getPropertyCSSValue('-webkit-transform')[0][5].cssText)
+		} else {
+			var viewportTop = pageYOffset;
+		}
+	
 		var offset = scrollers[scroller].self.offsetTop
-		var viewportTop = document.body.scrollTop;
-		var halfWindowHeight = window.innerHeight / 2
 		var viewportBottom = window.innerHeight + viewportTop;
-		var priorContent = scrollers[scroller].self
-
-        if (scrollers[scroller].self.offsetTop <= viewportBottom){
+		
+		var tileHeight = this.tileHeight
+        if (offset <= viewportBottom+10 && offset + tileHeight >= viewportTop-10){
+        	var priorContent = scrollers[scroller].self
            	scrollers[scroller].self.style.webkitTransform = "translate3d(0px, " + Math.round((viewportTop - offset - this.imageshift) * .5) +"px, 0px)";
-        }
+        } 
     }
 }
 
-Parallax.prototype.mapParallax = function(e) {
+Parallax.prototype.mapParallax = function(e, useComputered) {
 	// Function here to allow me to choice which scrollers to map.
-	
-    this.translateParallax(this.scrollers);
+    this.translateParallax(this.scrollers, useComputered);
 }
