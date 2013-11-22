@@ -1,10 +1,44 @@
+
 <!-- <div id="row-1" class="row-1 full-column-12">
 	<div class="container">
 		<h1>Store Home</h1>
 	</div>
 </div> -->
 <div class="scroller-content full-window-height">
-	<div class="container vertical-perent-js-centring">
+	<div class="container padded vertical-perent-js-centring">
+		<div class="navigation">
+			<div class="container">
+				<ul class="navigation-bar left">
+					<li class="active">
+						<a href="/index">Home<span class="navigation-unread">1</span>
+						</a>
+					</li>
+					<li>
+						<a href="/enquiries">Messages<span class="navigation-unread">1</span></a>
+						<ul>
+							<li><a href="/product/manage">Manage Products</a></li>
+							<li><a href="/product/add">Add Product</a></li>
+							<li><a href="/product/add">Enquiries<span class="navigation-unread">1</span></a></li>
+						</ul> <!-- /Sub menu -->
+					</li>
+					<li>
+						<a href="/about">About Us</a>
+					</li>
+				</ul>
+				<ul class="navigation-bar right">
+					<li>
+						<a href="/user/profile">Daniel Koehler<span class="navigation-unread">1</span></a>
+						<ul>
+							<li><a href="/user/notifications">Notifications<span class="navigation-unread">1</span></a></li>
+							<li><a href="/user/logout">Logout</a></li>
+						</ul> <!-- /Sub menu -->
+					</li>
+				</ul>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
 		<h1 class="extra-large centre">I would like to be the first to admit that flat user interface deisgn, with perspective, is a strange idea.</h1>
 		<div class="switch-container">
 			<label for="ie-emulation-checkbox">IE Emulation</label>
@@ -25,12 +59,20 @@
 	</div>
 </div>
 <div class="scroller-back-layer-container">
-	<img src="https://d2c87l0yth4zbw.cloudfront.net/i/home/intro-jazz.jpg" id="first-image">
+	<img src="/assets/images/image1.jpg" id="first-image">
+<!-- 	<div class="container" id="first-image">
+		<br>
+		<br>
+		<br>
+		<h1>Parallax Backing...</h1>
+		<p>This seems to work...</p>
+	</div> -->
 </div>
 <div class="scroller-content inverted">
-	<div class="container">
+	<div class="container padded">
 		<h1 class="large centre">That would make this page completly orginal then... Great!</h1>
 		<p class="centre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices magna magna, at tempor risus placerat sed. Quisque eros odio, interdum et tellus a, consequat sodales ligula.</p>
+		<br>
 		<div class="switch-container">
 			<label for="css-panda">Helpful CSS Panda</label>
 			<div class="switch unselectable" title="Remove Html" id="remove-css">
@@ -50,10 +92,10 @@
 	</div>
 </div>
 <div class="scroller-back-layer-container">
-	<img src="https://d2c87l0yth4zbw.cloudfront.net/i/home/intro-bike.jpg" id="second-image">
+	<img src="/assets/images/image2.jpg" id="second-image">
 </div>
 <div class="scroller-content">
-	<div class="container">
+	<div class="container padded">
 		<h1 class="large centre">Hang on a minute! Didn't some company recently overhall thier mobile operating system and do something very similar...</h1>
 		<p class="centre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices magna magna, at tempor risus placerat sed. Quisque eros odio, interdum et tellus a, consequat sodales ligula.</p>
 	</div>
@@ -64,10 +106,10 @@
 	</div>
 </div>
 <div class="scroller-back-layer-container">
-	<img src="https://d2c87l0yth4zbw.cloudfront.net/i/home/intro-ipad.jpg"  id="third-image">
+	<img src="/assets/images/image3.jpg"  id="third-image">
 </div>
 <div class="scroller-content inverted">
-	<div class="container">
+	<div class="container padded">
 		<h1 class="large centre">Nah, I would have rembered...</h1>
 		<p class="centre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices magna magna, at tempor risus placerat sed. Quisque eros odio, interdum et tellus a, consequat sodales ligula.</p>
 	</div>
@@ -78,10 +120,10 @@
 	</div>
 </div>
 <div class="scroller-back-layer-container">
-	<img src="https://d2c87l0yth4zbw.cloudfront.net/i/home/intro-fence.jpg"  id="forth-image">
+	<img src="/assets/images/image4.jpg"  id="forth-image">
 </div>
 <div class="scroller-content">
-	<div class="container">
+	<div class="container padded">
 		<h1 class="large centre">Aha, I have tricked you! You now have no option but to buy something.</h1>
 		<p class="centre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices magna magna, at tempor risus placerat sed. Quisque eros odio, interdum et tellus a, consequat sodales ligula.</p>
 	</div>
@@ -91,10 +133,55 @@
 		</span>
 	</div>
 </div>
-<div class="scroller-content inverted">
-	<div class="container" id="login-panel">
+<div class="scroller-content inverted full-window-height">
+	<div class="container padded" id="login-panel">
+		<div class="navigation">
+			<div class="container">
+				<ul class="navigation-bar left">
+					<li class="active">
+						<a href="/index">Home<span class="navigation-unread">1</span>
+						</a>
+					</li>
+					<li>
+						<a href="/enquiries">Messages<span class="navigation-unread">1</span></a>
+						<ul>
+							<li><a href="/product/manage">Manage Products</a></li>
+							<li><a href="/product/add">Add Product</a></li>
+							<li><a href="/product/add">Enquiries<span class="navigation-unread">1</span></a></li>
+						</ul> <!-- /Sub menu -->
+					</li>
+					<li>
+						<a href="/about">About Us</a>
+					</li>
+				</ul>
+				<ul class="navigation-bar right">
+					<li>
+						<a href="/user/profile">Daniel Koehler<span class="navigation-unread">1</span></a>
+						<ul>
+							<li><a href="/user/notifications">Notifications<span class="navigation-unread">1</span></a></li>
+							<li><a href="/user/logout">Logout</a></li>
+						</ul> <!-- /Sub menu -->
+					</li>
+				</ul>
+			</div>
+		</div>
+		<br>
 		<h1 class="large centre">Now might I temp you to login or register? <br>(Yes I did just invert the colour. "How?" I hear you say, well that would be some nicely classed OOCSS)</h1>
 		<p class="centre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices magna magna, at tempor risus placerat sed. Quisque eros odio, interdum et tellus a, consequat sodales ligula.</p>
+		<form action="/user/login" method="post" class="ajax-action-handled-form styled padded-vertical">
+			<div class="input-group">
+				<label for="username"></label>
+				<input type="text" required="required" name="userlogin[username]" class="input has-label text" placeholder="Username">
+			</div>	
+			<div class="input-group">
+				<label for="password"></label>
+				<input type="password" required="required" name="userlogin[password]" class="input has-label text" placeholder="Password">
+			</div>	
+			<div class="input-group">
+				<button type="submit" class="input normal">Login</button>
+			</div>
+			<a href="#register">Need an account?</a>
+		</form>
 	</div>
 	<div class="up-arrow-wrap smooth-navigation-top">
 		<span class="up-arrow">
@@ -102,20 +189,19 @@
 		</span>
 	</div>
 </div>
-
 <script type="text/javascript">
 		// TEMP SOLUTION. REMOVE AT EARLIEST CONVENIENCE!
 		
-        document.getElementById('remove-css').addEventListener('dkswitched',function(){
-    		var title = document.title
-    		document.head.innerHTML = ""
-    		document.title = title
-    		document.body.innerHTML = "<p>Welcome to Internet Explorer</p><p>Sorry, something went wrong...</p>"
-        });
-        
+		document.getElementById('remove-css').addEventListener('dkswitched',function(){
+			var title = document.title
+			document.head.innerHTML = ""
+			document.title = title
+			document.body.innerHTML = "<p>Welcome to Internet Explorer</p><p>Sorry, something went wrong...</p>"
+		});
+		
 		// Start my Paralex 'class', god the no frameworks rule, I so wish I could have used 
-        parallax = new Parallax(['first-image','second-image','third-image','forth-image'], 200);
-        parallax.start()
+		parallax = new Parallax(['first-image','second-image','third-image','forth-image'],450);
+		parallax.start()
 
-        //MOVE TO OWN UI JS LIB
+		//MOVE TO OWN UI JS LIB
 </script>

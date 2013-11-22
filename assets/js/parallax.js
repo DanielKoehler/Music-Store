@@ -26,30 +26,42 @@ Parallax.prototype.scrollers =  function()
 	return this.scrollers
 } 
 
-Parallax.prototype.translateParallax = function(scrollers, useComputered){
+Parallax.prototype.translateParallax = function(scrollers, useComputered, direction){
 	
 	// Let's do some math's and style updates and let CSS do the rest.
 
 	for (scroller in scrollers){
 
 		if (useComputered){
-			var viewportTop = pageYOffset + Math.abs(window.getComputedStyle(document.body).getPropertyCSSValue('-webkit-transform')[0][5].cssText)
+			var viewportTop = pageYOffset
+			var documentTranslate = Math.abs(window.getComputedStyle(document.body).getPropertyCSSValue('-webkit-transform')[0][5].cssText)
+			if(direction){
+				viewportTop -= documentTranslate
+			} else {
+				viewportTop += documentTranslate
+			}
 		} else {
 			var viewportTop = pageYOffset;
 		}
-	
+		
 		var offset = scrollers[scroller].self.offsetTop
 		var viewportBottom = window.innerHeight + viewportTop;
 		
 		var tileHeight = this.tileHeight
         if (offset <= viewportBottom+10 && offset + tileHeight >= viewportTop-10){
         	var priorContent = scrollers[scroller].self
-           	scrollers[scroller].self.style.webkitTransform = "translate3d(0px, " + Math.round((viewportTop - offset - this.imageshift) * .5) +"px, 0px)";
+        	var set = Math.round((viewportTop - offset - this.imageshift) * .5)
+           	scrollers[scroller].self.style.webkitTransform = "translate3d(0px, " + set +"px, 0px)";
         } 
     }
 }
 
-Parallax.prototype.mapParallax = function(e, useComputered) {
+Parallax.prototype.mapParallax = function(e, useComputered, direction) {
+	// Function here to allow me to choice which scrollers to map.
+    this.translateParallax(this.scrollers, useComputered, direction);
+}
+
+Parallax.prototype.addScroller = function(content, id) {
 	// Function here to allow me to choice which scrollers to map.
     this.translateParallax(this.scrollers, useComputered);
 }
