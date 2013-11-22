@@ -40,5 +40,5 @@ if(file_exists($path.$controller.$ext)){
 }
 
 if($error === true){
-	echo '<h1>404 error: Page not found.</h1><p>Reason: Unknown (This is not actually true, the controller method pair don\'t exist...).</p>';
+	echo '<h1>404 error: Page not found.</h1><p>Reason: Unknown (This is not actually true, the controller method pair doesn\'t exist...).</p>';
 }
