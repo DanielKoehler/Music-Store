@@ -1,0 +1,128 @@
+body {
+	background-color: #ecf0f1;
+}
+
+*.unselectable {
+   -moz-user-select: -moz-none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+}
+
+.full-window-height {
+	height: 100vh;
+}
+
+h1.large {
+	font-size: 46px;
+	line-height: 1;
+	margin: 10px 0 50px 0;
+}
+
+h1.extra-large {
+	font-size: 60px;
+	margin: 0 0 60px;
+}
+
+.centre {text-align: center;}
+
+/* Classic Colour Defaults ----------- */
+
+p {
+    color: #2c3e50;
+}
+
+h1, h2, h3, h4 {
+	color: #8e44ad;
+	font-weight: 100;
+}
+
+
+/* Inverted Defaults ----------- */
+
+/*.scroller-content .switch-container > label  {
+	width:150px;
+}*/
+
+.inverted {
+    background: #8e44ad;
+}
+.inverted h1,.inverted  h2, .inverted h3,.inverted  h4 {
+    color: #ecf0f1;
+}
+.inverted p {
+    color:#bdc3c7
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+/* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+
+    .container {
+        width:980px;
+        margin: 0 auto;
+    }
+
+    .container.padded {
+		padding: 100px 0;
+    }
+
+	.scroller-back-layer-container {
+		width: 100%;
+		height: 420px;
+		max-height: 520px;
+		overflow: hidden;
+	}
+
+	.scroller-background img {
+		width:100%;
+	}
+
+	.scroller-content {
+		display: table;
+		width: 100%;
+		text-align: center;
+		position: relative;
+	}
+
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+/* Styles */
+}
+
+/* iPhone 4 ----------- */
+@mediaonly screen and (-webkit-min-device-pixel-ratio : 1.5),only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}

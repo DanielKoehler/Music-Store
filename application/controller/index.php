@@ -13,6 +13,7 @@ class index {
 
  	function index()
  	{
+ 		$_SESSION['order'] = 'Some session data';
  		// Set up <head>
  		$this->page->html->head->configure('page');
 		$this->page->html->head->add('<title>Home Page | Some Store</title>');

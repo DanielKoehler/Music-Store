@@ -38,7 +38,7 @@ class user {
  
  	// 	$this->load->view($this->page);
 
- 		$ajax['content'] = '<div class="scroller-content inverted"></div>';
+ 		$ajax['content'] = array('scroler-one' => '<div class="scroller-content inverted"></div>');
  		$ajax['error'] = false;  
  		$ajax['appendScroller'] = true; 
  		$ajax['disableScroller'] = 'all'; // array(1,2,5,6) n based index

@@ -4,7 +4,8 @@ class database{
 	function __construct()
 	{
 		try{
-			$this->conn = new PDO('mysql:host=ephesus.cs.cf.ac.uk;dbname=c1340154;','c1340154', 'caffenero');
+			// $this->conn = new PDO('mysql:host=ephesus.cs.cf.ac.uk;dbname=c1340154;','c1340154', 'caffenero');
+			$this->conn = new PDO('mysql:host=localhost;dbname=c1340154;','root', '');
 			$this->conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);	
 		} catch(PDOException $e){
 			die($e->getMessage());
@@ -28,19 +29,30 @@ class database{
 	function select($sql, $data = array())
 	{
 		$stmt = $this->conn->prepare($sql);
-		$stmt->execute($data);
+		try {
+			$stmt->execute($data);
+		} catch(PDOException $e){
+			die($e->getMessage());
+		}
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 	function insert($table, $data)
 	{
-		foreach($data as $key => $value)
-		{
-			$columns[] = $key;
+		if(!empty($data)){
+			foreach($data as $key => $value)
+			{
+				$columns[] = $key;
+			}
+			$stmt = $this->conn->prepare("INSERT INTO `$table` (`".implode('`, `', $columns)."`) VALUES (".implode(', ', array_keys($this->prep_keys($data))).")");
+			
+			try {
+				$stmt->execute($this->prep_keys($data));
+			} catch(PDOException $e){
+				die($e->getMessage());
+			}
+			return $this->conn->lastInsertId();
 		}
-		$stmt = $this->conn->prepare("INSERT INTO `$table` (`".implode('`, `', $columns)."`) VALUES (".implode(', ', array_keys($this->prep_keys($data))).")");
-		$stmt->execute($this->prep_keys($data));
-		return $this->conn->lastInsertId();
 	}
 
 	function update($table, $data,$where_column,$ids)
@@ -55,7 +67,11 @@ class database{
 
 		foreach ($ids as $id) {
 			$data['whereid'] = $id;
-			$state = $stmt->execute($this->prep_keys($data));
+			try {
+				$state = $stmt->execute($this->prep_keys($data));
+			} catch(PDOException $e){
+				die($e->getMessage());
+			}
 		}
 		
 		return $state;
@@ -68,7 +84,11 @@ class database{
 			$data['whereid'] = $id;
 			$state = $stmt->execute($this->prep_keys($data));
 		}
-		return $stmt->execute();
+		try {
+			return $stmt->execute();
+		} catch(PDOException $e){
+			die($e->getMessage());
+		}
 	}
 
 	function force_disconect()

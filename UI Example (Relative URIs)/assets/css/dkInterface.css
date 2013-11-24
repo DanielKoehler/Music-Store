@@ -439,7 +439,7 @@ body, html, div, h1, h2, h3, h4, h5, p, li, ul {
   line-height: 40px;
   height: 40px;
   transition: all .4s;  
-  background: url('/assets/images/icons/upload@2.png') no-repeat 15px 10px, #ecf0f1; 
+  background: url('../../assets/images/icons/upload@2.png') no-repeat 15px 10px, #ecf0f1; 
   background-size: 30px;
   border-color: #34495e;
   border-radius: 10px;

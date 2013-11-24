@@ -1,4 +1,5 @@
 <?php
+session_start();
 date_default_timezone_set('UTC');
 $ext = '.php';
 $path = realpath('./').'/application/model/';
@@ -40,5 +41,5 @@ if(file_exists($path.$controller.$ext)){
 }
 
 if($error === true){
-	echo '<h1>404 error: Page not found.</h1><p>Reason: Unknown (This is not actually true, the controller method pair doesn\'t exist...).</p>';
+	echo '<h1>404 Error: Page not found.</h1><p>Reason: Unknown (This is not actually true, the controller method pair doesn\'t exist...).</p>';
 }
