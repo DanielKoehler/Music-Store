@@ -6,10 +6,11 @@ Cardiff Univeristy Coursework project centred around selling the awesome open so
 Restrictions<sup>1<sup>
 ============
 
-Restrictions for this project are
-
-Must be a shopping platform
-Can't use any third party frameworks
-Must use PHP
+Restrictions for this project are:
+<ol type="a">
+<li>Must be a shopping platform</li>
+<li>Can't use any third party frameworks</li>
+<li>Must use PHP</li>
+</ol>
 
 <sup>1. Shamelessly stolen from <a href="https://github.com/KiranPanesar">Kiran Panesar</a></sup>
