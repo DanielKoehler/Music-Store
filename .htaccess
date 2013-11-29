@@ -1,4 +1,4 @@
-RewriteEngine On
+RewriteEngine Off
 RewriteBase  / 
 RewriteRule ^([0-9a-zA-Z_-]+)?\.html$ index.php?c=$1
 RewriteRule ^([0-9a-zA-Z_-]+)/([0-9a-zA-Z_-]+)?(\.html|\.php)$ index.php?c=$1&m=$2

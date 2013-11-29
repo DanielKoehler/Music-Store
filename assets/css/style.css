@@ -3,7 +3,7 @@ body {
 }
 
 .full-window-height {
-	height: 100vh;
+	height: auto;
 }
 
 h1.large {
@@ -50,14 +50,15 @@ h1, h2, h3, h4 {
 .header.logo a {
 	margin: 30px 0;
 	margin-left: 10px;
-	font-weight: 800;
+	font-weight: 400;
 	font-size: 34px;
-	text-indent: 70px;
+	/* text-indent: 70px; */
 	height: 34px;
 	line-height: 34px;
 	text-decoration: none;
 	color: #7F8C8D;
 	float: left;
+	font-family: 'Nixie One', cursive;
 	position: relative;
 }
 
@@ -71,6 +72,37 @@ h1, h2, h3, h4 {
 	left: 0;
 	top: 0px;
 	position: absolute;
+}
+
+.container {
+    width:980px;
+    margin: 0 auto;
+}
+
+body > div:first-child .container.padded {
+	padding-top: 0;
+}
+
+.container.padded {
+	padding: 100px 0;
+}
+
+.scroller-back-layer-container {
+	width: 100%;
+	height: 420px;
+	max-height: 520px;
+	overflow: hidden;
+}
+
+.scroller-background img {
+	width:100%;
+}
+
+.scroller-content {
+	display: table;
+	width: 100%;
+	text-align: center;
+	position: relative;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -105,37 +137,6 @@ h1, h2, h3, h4 {
 
 /* Desktops and laptops ----------- */
 @media only screen and (min-width : 1224px) {
-
-    .container {
-        width:980px;
-        margin: 0 auto;
-    }
-
-    body > div:first-child .container.padded {
-		padding-top: 0;
-    }
-
-    .container.padded {
-		padding: 100px 0;
-    }
-
-	.scroller-back-layer-container {
-		width: 100%;
-		height: 420px;
-		max-height: 520px;
-		overflow: hidden;
-	}
-
-	.scroller-background img {
-		width:100%;
-	}
-
-	.scroller-content {
-		display: table;
-		width: 100%;
-		text-align: center;
-		position: relative;
-	}
 
 }
 

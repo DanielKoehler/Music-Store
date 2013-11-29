@@ -3,7 +3,7 @@ body, html, div, h1, h2, h3, h4, h5, p, li, ul {
 	padding: 0;
 	list-style: none;
 	outline: none;
-	font-family: 'Open Sans', sans-serif;
+	font-family:  'Nixie One', cursive;
 }
 
 @-webkit-keyframes navigation-unread {
@@ -548,6 +548,7 @@ form.styled input:-ms-input-placeholder {
 .navigation {
 	width: 100%;
 	padding-bottom: 25px;
+	height: 146px;
 }
 
 .navigation-bar {
@@ -609,9 +610,10 @@ form.styled input:-ms-input-placeholder {
 .navigation ul.navigation-bar > li > a {
 	color:#fff;
 	font-weight: 400;
-	padding: 13px 21px 13px;
+	padding: 0 21px;
 	font-size: 16px;
-	height: 22px;
+	line-height: 50px;
+	height: 48px;
 	text-decoration:none;
 	display: inline-block;
 	border-bottom: 2px solid #2c3e50;
@@ -663,7 +665,7 @@ form.styled input:-ms-input-placeholder {
 .navigation ul.navigation-bar > li > ul {
 	opacity: 0;
 	position: absolute;
-	visibility: hidden;
+	display: none;
 	padding-top: 10px;
 	z-index: 10;
 	-webkit-transition:opacity 0.3s ease;
@@ -727,7 +729,7 @@ form.styled input:-ms-input-placeholder {
 .navigation ul.navigation-bar > li:hover ul {
 	opacity: 1
 ;
-	visibility: visible;
+	display: block;
 }
 
 
@@ -743,10 +745,12 @@ form.styled input:-ms-input-placeholder {
 
 .navigation ul.navigation-bar.right > li > ul >li {
 	text-align: right;
+	padding: 10px 25px;
 }
 
 .navigation ul.navigation-bar > li > ul >li:first-child {
 	border-radius: 6px 6px 0 0;
+	padding-top: 16px;
 }
 
 .navigation ul.navigation-bar > li > ul >li:last-child {
@@ -799,7 +803,7 @@ form.styled input:-ms-input-placeholder {
 	left: 55px;
 }
 	
-.navigation ul.navigation-bar > li.open.search-button input:focus {
+.navigation ul.navigation-bar > li.search-button input:focus {
 	outline:none;	
 }
 
@@ -836,8 +840,7 @@ form.styled input:-ms-input-placeholder {
 }
 
 #intellitype {
-    width: 219px;
-    padding: 10px;
+    width: 239px;
     position: absolute;
     background: #FFF;
     z-index: 20;
@@ -848,9 +851,10 @@ form.styled input:-ms-input-placeholder {
 
 #intellitype a {
     display: block;
+    width: 219px;
     background: #fff;
     border: none;
-    padding: 3px 10px 3px;
+    padding: 5px 10px 5px;
     text-decoration: none;
     color: #000;
     line-height:20px;
@@ -858,12 +862,12 @@ form.styled input:-ms-input-placeholder {
     -webkit-transition: background-color 0.2s ease;
 }
 
-#intellitype a:hover {
+#intellitype a:hover, #intellitype a.selection {
     background:#eee;
 }
 
-#intellitype a:first-child {padding-top: 6px}
-#intellitype a:last-child {padding-bottom: 6px}
+#intellitype a:first-child {padding-top: 5px;}
+#intellitype a:last-child {padding-bottom: 5px;}
 
 /* Cart styles */
 

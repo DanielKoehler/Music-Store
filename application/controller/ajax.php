@@ -66,7 +66,7 @@ class ajax {
 
 		$input = preg_quote($_POST['query'], '~'); // don't forget to quote input string!
 		$result = preg_grep('~' . $input . '~', $suggestions);
-		die(json_encode($result));
+		die(json_encode(array_splice(array_unique($result), 0,6)));
  		
  	}
 }

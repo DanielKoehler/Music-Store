@@ -16,6 +16,7 @@ class page {
 		$this->html = new html();
 		$this->includes = new includes();
 		$this->navigation = new navigation();
+		$this->page->data['ajax'] = array('error' => false, 'message' => array('type' => '', 'content' => ''), 'location' => array('state' => 'stay', 'mode' => 'partial', 'address' => ''));
 	}
 
 	function clean($data){
@@ -34,12 +35,34 @@ class page {
 	{
 		switch ($template) {
 			case 'page':
-				$this->navigation->add('home_page', 'left', 'Home', '/index.html');
-				$this->navigation->add('categories_page', 'left', 'Categories', '/catergories/view.html');
-				$this->navigation->add('about_page','left', 'About', '/index/about.html');
-				$this->navigation->add('search_bar', 'right', '<i class="fa fa-search"></i>','/products/search.html', '<form action="search.html" method="post"><input type="text" id="navbar-search" placeholder="Search the store" autocomplete="off" name="search"></form><div id="intellitype"></div>', 'search-button', '');
-				$this->navigation->add('login_page', 'right', 'Login', '/user/login.html');
-				$this->navigation->add_child('login_page','Register', '/user/register.html');
+
+				// Fetch Notifcations
+				$this->data['notifications'][0] = array();
+				
+				$this->navigation->add('home_page', 'left', 'Home', './index.php');
+				$this->navigation->add('store_page', 'left', 'Store', 'index.php?c=store&amp;m=view');
+				$this->navigation->add('about_page','left', 'About', './index.php?c=index&amp;m=about');
+
+				if(!empty($_SESSION)){
+					switch ($_SESSION['authorisation']) {
+						case 5: // Normal User
+							break;
+						case 1: // Admin 
+							$this->navigation->add('control_panel_page','left', 'Control Panel', './index.php?c=admin&amp;m=index');
+							break;
+					}
+					$this->navigation->add('profile_page', 'right', $_SESSION['username'], './index.php?c=user&amp;m=login');
+					$this->navigation->add_child('profile_page','Notifications', './index.php?c=user&amp;m=notification', null, null, null, null, count($this->data['notifications']));	
+					$this->navigation->add_child('profile_page','Logout', './index.php?c=user&amp;m=logout');	
+				} else {
+					$this->navigation->add('login_page', 'right', 'Login', './index.php?c=user&amp;m=login');
+				}
+
+				$this->navigation->add('search_bar', 'right', '<i class="fa fa-search"></i>','./index.php?c=store&amp;m=search', '<form action="./index.php?c=store&amp;m=search" method="get"><input type="text" id="navbar-search" placeholder="Search the store" autocomplete="off" name="search"></form><div id="intellitype"></div>', 'search-button', '');
+
+			
+
+						// $this->navigation->add_child('login_page','or Register?', '/user/register.html');
 				
 				$this->navigation->add('shopping_cart', 'right', '<i class="fa fa-shopping-cart"></i><span class="cart-items">2</span>', '/basket/view.html', 
 					'<ul>Cart Content...</ul>', 
@@ -51,13 +74,15 @@ class page {
 				$this->html->head->add('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
 				$this->html->head->add('<meta name="description" content="River Crossing Adventure! Store">');
 				$this->html->head->add('<meta name="author" content="Daniel Koehler">');
-				$this->html->head->add('<script type="text/javascript" src="/assets/js/global.js"></script>');
-				$this->html->head->add('<script type="text/javascript" src="/assets/js/dkInterface.js"></script>');
-				$this->html->head->add('<link href="/assets/css/dkInterface.css" rel="stylesheet" type="text/css">');
-				$this->html->head->add('<link href="/assets/css/style.css" rel="stylesheet" type="text/css">');
+				$this->html->head->add('<script type="text/javascript" src="./assets/js/global.js"></script>');
+				$this->html->head->add('<script type="text/javascript" src="./assets/js/dkInterface.js"></script>');
+				$this->html->head->add('<link href="./assets/css/dkInterface.css" rel="stylesheet" type="text/css">');
+				$this->html->head->add('<link href="./assets/css/style.css" rel="stylesheet" type="text/css">');
 	
-				// Include THIRD PARTY style sheets, a fontface inport from each Google Fonts and FontAwesome.
+				// Include THIRD PARTY style sheets, two fontface inport from Google Fonts and one from FontAwesome.
 				$this->html->head->add("<!-- Third Party CSS include for Open Sans Font. -->\n<link href=\"http://fonts.googleapis.com/css?family=Open+Sans:300,400,800\" rel=\"stylesheet\" type=\"text/css\">");
+				$this->html->head->add("<!-- Third Party CSS include for Open Sans Font. -->\n<link href='http://fonts.googleapis.com/css?family=Monsieur+La+Doulaise' rel='stylesheet' type='text/css'>");
+				$this->html->head->add("<!-- Third Party CSS include for Open Sans Font. -->\n<link href='http://fonts.googleapis.com/css?family=Nixie+One' rel='stylesheet' type='text/css'>");
 				$this->html->head->add("<!-- Third Party CSS include for Font Awesome, I\'m using this for vector Glyph Icons. --><link href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css\" rel=\"stylesheet\">");
 
 				break;
@@ -130,7 +155,9 @@ class navigation {
 
 	function add_child($parent, $anchor, $href = '#', $content = "", $li_class = "", $class = "ajax-handled-anchor no-navigation",$children = 0, $unread = 0,  $nav_object = 1)
 	{
-		$this->data[$parent]['children'] = array();
+		if(empty($this->data[$parent]['children'])){
+			$this->data[$parent]['children'] = array();
+		}
 		$this->data[$parent]['children'][] = array(
 			'nav_object' => $nav_object, 
 			'href' => $href,
@@ -198,7 +225,7 @@ class navigation {
 			foreach ($this->data as $block_handle => $block) {
 				if(!empty($block['nav_object'])){
 					if($block['side'] == $side){
-						$output .= $this->block($block);
+						$output .= $this->block($block, $block_handle);
 					}
 				}
 			}
@@ -207,15 +234,20 @@ class navigation {
 		return '<ul class="navigation-bar ' . $side . '">' . $output . '</ul>';
 	}
 
-	private function block($block){
+	private function block($block, $block_handle = null){
 		
 		$content = "<a";
 
 		if(!empty($block['href'])){
 			$content .= ' href="' . $block['href'] . '"';
 		}
+		
 		if(!empty($block['class'])){
 			$content .= ' class="' . $block['class'] . '"';
+		}
+
+		if(!empty($block_handle)){
+			$content .= ' id="' . $block_handle . '"';
 		}
 
 		$content .= ">";

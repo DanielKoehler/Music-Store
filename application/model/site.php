@@ -1,9 +1,12 @@
 <?php
 class site {
-	var $system;
+	var $settings;
 	function __construct(){
 		$db = new database();
-		$this->system = $db->select("SELECT * FROM `system`");
+		$this->settings = array();
+		foreach ($db->yield_select("SELECT * FROM `system`") as $row){
+			$this->settings[$row['property']] = $row['value'];
+		}
 		$db->force_disconnect();
 	}
 

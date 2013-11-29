@@ -37,6 +37,36 @@ class database{
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 
+	function num_rows($sql, $data = array())
+	{
+		$stmt = $this->conn->prepare($sql);
+		try {
+			$stmt->execute($data);
+		} catch(PDOException $e){
+			die($e->getMessage());
+		}
+		
+		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$n = count($rows);
+		
+		return $n;
+	}
+
+	function yield_select($sql, $data = array())
+	{
+		$stmt = $this->conn->prepare($sql);
+		try {
+			$stmt->execute($data);
+		} catch(PDOException $e){
+			die($e->getMessage());
+		}
+
+		$results = array();
+		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { 
+			yield $row;
+		}
+	}
+
 	function insert($table, $data)
 	{
 		if(!empty($data)){
@@ -91,7 +121,7 @@ class database{
 		}
 	}
 
-	function force_disconect()
+	function force_disconnect()
 	{
 		$this->conn = null;
 	}

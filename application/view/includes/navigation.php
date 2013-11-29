@@ -1,6 +1,7 @@
-<header class="navigation">
+<header class="navigation container">
 	<div class="header container logo">
-		<a href="/"><img src="/assets/images/logo.png" alt="RiverCrosingAdventure! - Web Store Logo">RiverCrosingAdventure! - Web Store</a>
+		<a href="/">DK Music</a>
+		<!-- <a href="/"><img src="/assets/images/logo.png" alt="RiverCrosingAdventure! - Web Store Logo">DK Music</a> -->
 	</div>
 	<div class="container navigation-container" id="navigation-container">
 	<?php 

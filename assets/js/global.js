@@ -16,7 +16,14 @@ function parentOfClass(elem,className)
 
 function parentOfType(elem,typeName)
 {	
+	if(!elem){
+		return false
+	}
+
 	while (elem.parentNode.nodeName != typeName.toUpperCase()){
+		if(elem.parentNode.parentNode == null){
+			return false
+		}
 		elem = elem.parentNode
 	}
 	return elem.parentNode
@@ -24,11 +31,12 @@ function parentOfType(elem,typeName)
 
 function toggleClass(elem, searchClass)
 {
-	if(!hasClass(elem, searchClass)){
-		addClass(elem, searchClass)
-	} else {
+	if(hasClass(elem, searchClass)){
 		removeClass(elem, searchClass)
+	} else {
+		addClass(elem, searchClass)
 	}
+	return true
 }
 
 function addClass(elem, searchClass)
@@ -38,21 +46,28 @@ function addClass(elem, searchClass)
 	}else {
 		elem.className = searchClass
 	}
-
+	return true
 }
 
 function removeClass(elem, searchClass)
 {
-	
+	if(elem == undefined){
+		return false
+	}
+
 	if(elem.className.length > searchClass.length){
 		elem.className = elem.className.replace(" "+ searchClass, "")
 	} else {
 		elem.className = elem.className.replace(searchClass, "")	
 	}
+	return true
 }
 
 function hasClass(elem, searchClass)
-{
+{		
+	if(elem == undefined){
+		return false
+	}
 	var classes = elem.className.split(" ");
 	if(!empty(classes)){
 		for (var i = classes.length - 1; i >= 0; i--) {
@@ -60,6 +75,22 @@ function hasClass(elem, searchClass)
 				return true
 			}
 		};
+	} else {
+		if(elem.className == searchClass){
+			return true
+		}
+	}
+	return false
+}
+
+function hasAttr(elem, searchAttr)
+{		
+	if(elem == undefined){
+		return false
+	}
+
+	if(elem.getAttribute(searchAttr)){
+		return true	
 	}
 	return false
 }
@@ -71,10 +102,8 @@ function smoothScrollTo(y)
 	} else {
 		step = 20 // Down
 	}
-	console.log('called' + y)
 
     interval = setInterval(function() {
-    	console.log(pageYOffset + step)
        	if (((pageYOffset + step >= y) && step > 0) || ((pageYOffset + step <= y) && step < 0)) {
        		window.scrollTo(0,y)
           	clearInterval(interval);
@@ -86,7 +115,7 @@ function smoothScrollTo(y)
 
 function empty(value, assig)
 {
-	if((typeof value === 'object' && Object.keys(value).length == 0) || value == null || value == undefined || value == ""){
+	if(value == null || value == undefined || value == "" || (typeof value === 'object' && Object.keys(value).length == 0)){
 		return true
 	}
 	return false
@@ -132,16 +161,54 @@ function fetchCookie(cookieHandle)
 	return cookieArray[cookieHandle]
 }
 
-function replaceDivisionFromURL(url, localDiv, forignDiv){
-	return true
+
+
+function replaceMainPageFromURL(url, full){ // full 1 or 0, replace header and main-page or just main-page 
+	ajax(url, {}, function (page){
+		var temp = document.createElement("div")
+		temp.innerHTML = page
+		var mainPage = temp.querySelector('div[id=main-page]')
+		
+		if(mainPage){
+			var title = temp.querySelector('title')
+			document.title = title.innerHTML
+			window.history.pushState(null, title.innerHTML, url);
+
+			document.getElementById('main-page').innerHTML = mainPage.innerHTML;
+			
+			dkInterfaceAddListeners()
+
+			if(full == 1){
+				var navigationContainer = temp.querySelector('div[id=navigation-container]')
+				document.getElementById('navigation-container').innerHTML = navigationContainer.innerHTML;
+			}
+
+			dkInterfaceAddheaderListeners()			
+
+			// Lets re-evaluate the scripts we may have loaded. 
+			scripts = mainPage.querySelectorAll('script')
+			for (var i = scripts.length - 1; i >= 0; i--) {
+				eval(scripts[i].innerHTML)
+			};
+
+		} else {
+			document.getElementById('main-page').innerHTML = '<div class="container padded"><p class="centre">Sorry, somesthing went wrong, please try opening the link in a new tab.</p></div>';
+		}
+		
+		// Clear the current temp.
+		temp = "";
+
+		fadeIn(document.getElementById('main-page'))
+	}, 0);
 }
 
 
-function ajax(url, postData,dataCallback)
+function ajax(url, postData,dataCallback, ajaxHeader)
 {
-
 	if(typeof postData === 'object'){
-		postData['ajax'] = true
+		if(ajaxHeader == 1){
+			postData['ajax'] = true
+		}
 		postData = urlEncode(postData);
 	}
 	var ajax = new XMLHttpRequest();
@@ -164,6 +231,42 @@ function ajax(url, postData,dataCallback)
 
 	ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	ajax.send(postData);
+}
+
+function fadeOut(element)
+{
+	if(empty(element.style)){
+		return false
+	}
+	
+	element.style.opacity = 1
+
+    interval = setInterval(function() {
+       	if (element.style.opacity <= 0.1) {
+       		element.style.opacity = 0
+          	clearInterval(interval);
+      		return false;
+       	}
+		element.style.opacity = parseFloat(element.style.opacity) - 0.05
+    }, 10);
+}
+
+function fadeIn(element)
+{
+	if(empty(element.style)){
+		return false
+	}
+
+	element.style.opacity = 0
+
+    interval = setInterval(function() {
+       	if (element.style.opacity >= 0.9) {
+       		element.style.opacity = 1
+          	clearInterval(interval);
+      		return false;
+       	}
+		element.style.opacity = parseFloat(element.style.opacity) + 0.05
+    }, 10);
 }
 
 function urlEncode(objects)

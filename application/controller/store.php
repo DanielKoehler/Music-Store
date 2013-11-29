@@ -11,6 +11,10 @@ class store {
 		$this->db = new database();
 	}
 
+	function index(){
+
+	}
+
  	function cart()
  	{	
  		$this->db->insert('order', $_SESSION['order']);
