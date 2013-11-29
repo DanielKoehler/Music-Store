@@ -1,4 +1,4 @@
-function Parallax(scrollers, imageshift) {
+function Parallax(scrollers, imageshift,speed, scrollerHeight) {
 
 	// Ah the joys of OOP in JavaScipt, let's consider this construct function.
 	self = this
@@ -12,7 +12,14 @@ function Parallax(scrollers, imageshift) {
 		if(height > this.tileHeight){
 			this.tileHeight = height
 		}
+		if(!empty(scrollerHeight)){
+			element.parentNode.style.height = scrollerHeight + "px"
+		}
 		element.style.webkitTransform = "translate3d(0px, 0px, 0px)";
+	}
+	this.speed = 0.5
+	if(!empty(speed)){
+		this.speed = speed;
 	}
 }
 
@@ -50,7 +57,7 @@ Parallax.prototype.translateParallax = function(scrollers, useComputered, direct
 		var tileHeight = this.tileHeight
         if (offset <= viewportBottom+10 && offset + tileHeight >= viewportTop-10){
         	var priorContent = scrollers[scroller].self
-        	var set = Math.round((viewportTop - offset - this.imageshift) * .5)
+        	var set = Math.round((viewportTop - offset - this.imageshift) * this.speed)
            	scrollers[scroller].self.style.webkitTransform = "translate3d(0px, " + set +"px, 0px)";
         } 
     }

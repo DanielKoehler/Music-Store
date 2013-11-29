@@ -79,8 +79,25 @@ window.onload = function () {
 	function handleJson(data){
 		var data = JSON.parse(data)
 		console.log(data)
-		if(data.appendScroller){
-
+		if(data.error == 0){
+			console.log('hello');
 		}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	}
 }

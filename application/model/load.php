@@ -42,19 +42,26 @@ class load{
 		$path = realpath('./').'/application/view/';
 		$ext = '.php';
 
-		if(!empty($_GET['ajax']) && $_GET['ajax'] == true){
+		if(!empty($_POST['ajax']) && $_POST['ajax'] == true){
 			die(json_encode($this->page->data));
 		}
 		
-		if(is_array($this->page->data) && !empty($this->page->data)){
+		if(!empty($this->page->data) && is_array($this->page->data)){
 			extract($this->page->data);
 		}
 
-		if(!empty($this->page->includes->data )){
+		if(!empty($this->page->includes->data)){
 			foreach ($this->page->includes->data as $file_path) {
-				if(file_exists($path.$file_path.$ext)){
-					require_once($path.$file_path.$ext);
-				}
+				if(!file_exists($path.$file_path.$ext)){
+					die(header('Location: /404.html'));
+				} 
+				require_once($path.$file_path.$ext);
+			}
+		} else {
+			if(!file_exists($path.$page.$ext)){
+				die(header('Location: /404.html'));
+			} else {
+				require_once($path.$page.$ext);
 			}
 		}
 	}

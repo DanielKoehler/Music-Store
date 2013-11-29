@@ -1,12 +1,15 @@
 <?php
 session_start();
 date_default_timezone_set('UTC');
+
+$models = array('page', 'database', 'load', 'site');
+
 $ext = '.php';
 $path = realpath('./').'/application/model/';
 
-require_once($path.'page'.$ext);
-require_once($path.'database'.$ext);
-require_once($path.'load'.$ext);
+foreach ($models as $model) {
+	require_once($path.$model.$ext);
+}
 
 $path = realpath('./').'/application/controller/';
 $error = false;
@@ -42,4 +45,5 @@ if(file_exists($path.$controller.$ext)){
 
 if($error === true){
 	echo '<h1>404 Error: Page not found.</h1><p>Reason: Unknown (This is not actually true, the controller method pair doesn\'t exist...).</p>';
+	// header('Location:/404.html');
 }
