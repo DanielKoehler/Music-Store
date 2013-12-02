@@ -16,7 +16,7 @@ class page {
 		$this->html = new html();
 		$this->includes = new includes();
 		$this->navigation = new navigation();
-		$this->page->data['ajax'] = array('error' => false, 'message' => array('type' => '', 'content' => ''), 'location' => array('state' => 'stay', 'mode' => 'partial', 'address' => ''));
+		$this->page->data['ajax'] = array('error' => false, 'message' => array(0 => array('type' => '', 'content' => '')), 'location' => array('state' => 'stay', 'mode' => 'partial', 'address' => ''));
 	}
 
 	function clean($data){
@@ -36,38 +36,9 @@ class page {
 		switch ($template) {
 			case 'page':
 
-				// Fetch Notifcations
 				$this->data['notifications'][0] = array();
-				
-				$this->navigation->add('home_page', 'left', 'Home', './index.php');
-				$this->navigation->add('store_page', 'left', 'Store', 'index.php?c=store&amp;m=view');
-				$this->navigation->add('about_page','left', 'About', './index.php?c=index&amp;m=about');
 
-				if(!empty($_SESSION)){
-					switch ($_SESSION['authorisation']) {
-						case 5: // Normal User
-							break;
-						case 1: // Admin 
-							$this->navigation->add('control_panel_page','left', 'Control Panel', './index.php?c=admin&amp;m=index');
-							break;
-					}
-					$this->navigation->add('profile_page', 'right', $_SESSION['username'], './index.php?c=user&amp;m=login');
-					$this->navigation->add_child('profile_page','Notifications', './index.php?c=user&amp;m=notification', null, null, null, null, count($this->data['notifications']));	
-					$this->navigation->add_child('profile_page','Logout', './index.php?c=user&amp;m=logout');	
-				} else {
-					$this->navigation->add('login_page', 'right', 'Login', './index.php?c=user&amp;m=login');
-				}
-
-				$this->navigation->add('search_bar', 'right', '<i class="fa fa-search"></i>','./index.php?c=store&amp;m=search', '<form action="./index.php?c=store&amp;m=search" method="get"><input type="text" id="navbar-search" placeholder="Search the store" autocomplete="off" name="search"></form><div id="intellitype"></div>', 'search-button', '');
-
-			
-
-						// $this->navigation->add_child('login_page','or Register?', '/user/register.html');
-				
-				$this->navigation->add('shopping_cart', 'right', '<i class="fa fa-shopping-cart"></i><span class="cart-items">2</span>', '/basket/view.html', 
-					'<ul>Cart Content...</ul>', 
-					'cart', 'cart');
-
+				$this->navigation->configure('default', array('notifications' => $this->data['notifications']));
 		
 				$this->html->head->add('<meta charset="utf-8">');
 				$this->html->head->add('<meta http-equiv="X-UA-Compatible" content="IE=edge">');
@@ -136,6 +107,43 @@ class navigation {
 	function __construct ()
 	{
 		$this->data = array();
+	}
+
+	function configure($nav, $data = array())
+	{
+		switch ($nav) {
+			case 'default':
+				// Fetch Notifcations
+			
+				$this->add('home_page', 'left', 'Home', './index.php?c=index&amp;m=index');
+				$this->add('store_page', 'left', 'Store', 'index.php?c=store&amp;m=index');
+				$this->add('about_page','left', 'About', './index.php?c=index&amp;m=about');
+
+				if(!empty($_SESSION)){
+					
+					if($_SESSION['authorisation'] == 1) {
+						$this->add('control_panel_page','left', 'Control Panel', './index.php?c=admin&amp;m=index');	
+					}
+				
+					$this->add('profile_page', 'right', $_SESSION['username'], './index.php?c=user&amp;m=login');
+					$this->add_child('profile_page','Notifications', './index.php?c=user&amp;m=notification', null, null, null, null, count($data['notifications']));	
+					$this->add_child('profile_page','Logout', './index.php?c=user&amp;m=logout', null, null,"ajax-handled-anchor no-navigation full-refresh");	
+				
+				} else {
+					$this->add('login_page', 'right', 'Login', './index.php?c=user&amp;m=login');
+				}
+
+				$this->add('search_bar', 'right', '<i class="fa fa-search"></i>','./index.php?c=store&amp;m=search', '<form action="./index.php?c=store&amp;m=search" method="get"><input type="text" id="navbar-search" placeholder="Search the store" autocomplete="off" name="search"></form><div id="intellitype"></div>', 'search-button', '');
+				$this->add('shopping_cart', 'right', '<i class="fa fa-shopping-cart"></i><span class="cart-items">2</span>', '/basket/view.html', 
+					'<ul>Cart Content...</ul>', 
+					'cart', 'cart');
+				break;
+			default:
+				$this->add('home_page', 'left', 'Home', './index.php');
+				$this->add('store_page', 'left', 'Store', 'index.php?c=store&amp;m=view');
+				$this->add('about_page','left', 'About', './index.php?c=index&amp;m=about');
+				break;
+		}
 	}
 
 	function add($handle, $side, $anchor, $href = '#', $content = "", $li_class = "", $class = "ajax-handled-anchor no-navigation",$children = 0, $unread = 0,  $nav_object = 1)

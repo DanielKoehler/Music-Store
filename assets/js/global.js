@@ -161,48 +161,6 @@ function fetchCookie(cookieHandle)
 	return cookieArray[cookieHandle]
 }
 
-
-
-function replaceMainPageFromURL(url, full){ // full 1 or 0, replace header and main-page or just main-page 
-	ajax(url, {}, function (page){
-		var temp = document.createElement("div")
-		temp.innerHTML = page
-		var mainPage = temp.querySelector('div[id=main-page]')
-		
-		if(mainPage){
-			var title = temp.querySelector('title')
-			document.title = title.innerHTML
-			window.history.pushState(null, title.innerHTML, url);
-
-			document.getElementById('main-page').innerHTML = mainPage.innerHTML;
-			
-			dkInterfaceAddListeners()
-
-			if(full == 1){
-				var navigationContainer = temp.querySelector('div[id=navigation-container]')
-				document.getElementById('navigation-container').innerHTML = navigationContainer.innerHTML;
-			}
-
-			dkInterfaceAddheaderListeners()			
-
-			// Lets re-evaluate the scripts we may have loaded. 
-			scripts = mainPage.querySelectorAll('script')
-			for (var i = scripts.length - 1; i >= 0; i--) {
-				eval(scripts[i].innerHTML)
-			};
-
-		} else {
-			document.getElementById('main-page').innerHTML = '<div class="container padded"><p class="centre">Sorry, somesthing went wrong, please try opening the link in a new tab.</p></div>';
-		}
-		
-		// Clear the current temp.
-		temp = "";
-
-		fadeIn(document.getElementById('main-page'))
-	}, 0);
-}
-
-
 function ajax(url, postData,dataCallback, ajaxHeader)
 {
 	if(typeof postData === 'object'){
@@ -233,7 +191,7 @@ function ajax(url, postData,dataCallback, ajaxHeader)
 	ajax.send(postData);
 }
 
-function fadeOut(element)
+function fadeOut(element, callback)
 {
 	if(empty(element.style)){
 		return false
@@ -241,32 +199,38 @@ function fadeOut(element)
 	
 	element.style.opacity = 1
 
-    interval = setInterval(function() {
-       	if (element.style.opacity <= 0.1) {
+    animate()
+    function animate(){
+		if (element.style.opacity <= 0.1) {
        		element.style.opacity = 0
-          	clearInterval(interval);
+       		if(callback != undefined)
+       			callback()
       		return false;
-       	}
+       	} 
 		element.style.opacity = parseFloat(element.style.opacity) - 0.05
-    }, 10);
+		setTimeout(animate, 5);
+    }	
 }
 
-function fadeIn(element)
+function fadeIn(element, callback)
 {
 	if(empty(element.style)){
 		return false
 	}
-
+	
 	element.style.opacity = 0
 
-    interval = setInterval(function() {
-       	if (element.style.opacity >= 0.9) {
+    animate()
+    function animate(){
+		if (element.style.opacity >= 0.9) {
        		element.style.opacity = 1
-          	clearInterval(interval);
+       		if(callback != undefined)
+       			callback()
       		return false;
-       	}
+       	} 
 		element.style.opacity = parseFloat(element.style.opacity) + 0.05
-    }, 10);
+		setTimeout(animate, 10);
+    }	
 }
 
 function urlEncode(objects)

@@ -1,7 +1,7 @@
 <div id="main-page">
 	<div class="scroller-content full-window-height">
-		<div class="container" id="registraion-panel">
-			<h1 class="large centre">Login to River Crossing Adventure!</h1>
+		<div class="container padded" id="registraion-panel">
+			<h1 class="large centre">Login to DK Music</h1>
 			<p class="centre">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices magna magna, at tempor risus placerat sed. Quisque eros odio, interdum et tellus a, consequat sodales ligula.</p>
 			<form action="./index.php?c=user&amp;m=login" method="post" class="ajax-action-handled-form styled padded-vertical">
 				<div class="input-group">

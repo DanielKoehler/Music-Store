@@ -24,7 +24,9 @@ class user {
 
 		 	if(empty($form['password']) or empty($form['username'])){
 	 			
-	 			$this->page->data['ajax'] = array('error' => true, 'message' => 'Invalid Form Data', 'location' => array('state' => 'stay', 'mode' => '', 'address' => ''));
+	 			$this->page->data['ajax']['error'] = true;
+	 			$this->page->data['ajax']['message'][] = array('type' => 'error', 'content' => 'Unknown Client Error.');
+	 			$this->page->data['ajax']['location'] = array('state' => 'stay', 'mode' => '', 'address' => '');
 		 		$this->exit_script($this->page->data, './index.php?c=user&m=login');
 
 		 	}
@@ -33,7 +35,10 @@ class user {
 
 		 	if(count($user) !== 1){
 
-		 		$this->page->data['ajax'] = array('error' => true, 'message' => array('type' => 'error', 'content' => 'Invalid Username or Password'), 'location' => 'stay');
+	 			$this->page->data['ajax']['error'] = true;
+	 			$this->page->data['ajax']['message'][] = array('type' => 'error', 'content' => 'Invalid Username or Password');
+	 			$this->page->data['ajax']['location'] = array('state' => 'stay', 'mode' => '', 'address' => '');
+
 		 		$this->exit_script($this->page->data, './index.php?c=user&m=login');
 		 	
 		 	}
@@ -56,7 +61,11 @@ class user {
 		 			break;
 		 	}
 
-		 	$this->exit_script(array('error' => false, 'message' => array('type' => 'success', 'content' => trim(sprintf("Welcome %s %s", $user['first_name'], $user['last_name']))), 'location' => array('address' => $redirect, 'state' => 'move', 'mode' => 'full')), $redirect);
+	 		$this->page->data['ajax']['error'] = true;
+ 			$this->page->data['ajax']['message'][] = array('type' => 'success', 'content' =>trim(sprintf("Welcome %s %s", $user['first_name'], $user['last_name'])));
+ 			$this->page->data['ajax']['location'] = array('address' => $redirect, 'state' => 'move', 'mode' => 'full');
+
+		 	$this->exit_script($this->page->data, $redirect);
  		
  		}
 
@@ -64,9 +73,7 @@ class user {
 		$this->page->html->head->add('<title>Login | River Crossing Adventure!</title>');
 		$this->page->html->head->add('<script type="text/javascript" src="/assets/js/parallax.js"></script>');
 		$this->page->navigation->active('login_page');
- 		
- 		$this->page->data['scroller_one'] = '<p>' . $this->db->select("SELECT * FROM `user`")[0]['first_name'] . '</p>';
-
+ 	
  		$this->page->includes->add(array('includes/header', 'includes/navigation','login','includes/footer'));
  
  		$this->load->view($this->page);
@@ -93,9 +100,7 @@ class user {
  		$this->page->configure('page');
 		$this->page->html->head->add('<title>Register | River Crossing Adventure!</title>');
 		$this->page->html->head->add('<script type="text/javascript" src="/assets/js/parallax.js"></script>');
- 		
- 		$this->page->data['scroller_one'] = '<p>' . $this->db->select("SELECT * FROM `user`")[0]['first_name'] . '</p>';
-
+ 	
  		$this->page->includes->add(array('includes/header', 'includes/navigation','register','includes/footer'));
  
  		$this->load->view($this->page);

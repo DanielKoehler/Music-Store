@@ -18,8 +18,6 @@ class admin {
 		$this->page->html->head->add('<script type="text/javascript" src="/assets/js/parallax.js"></script>');
 		$this->page->navigation->active('control_panel_page');
  		
- 		// $this->page->data['scroller_one'] = '<p>' . $this->db->select("SELECT * FROM `user`")[0]['first_name'] . '</p>';
-
  		$this->page->includes->add(array('includes/header', 'includes/navigation','admin_index','includes/footer'));
  
  		$this->load->view($this->page);

@@ -14,3 +14,8 @@ Restrictions for this project are:
 </ol>
 
 <sup>1. Shamelessly stolen from <a href="https://github.com/KiranPanesar">Kiran Panesar</a></sup>
+
+Creative Commons-licensed content sources
+=========================================
+
+http://www.flickr.com/photos/doug88888/4542297929/#

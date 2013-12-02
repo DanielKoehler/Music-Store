@@ -11,63 +11,36 @@ class ajax {
 		$this->db = new database();
 	}
 
- 	function validate_registation_form()
- 	{
- 		// if(!empty($_POST)){
- 				
- 		// }
+	function validate_registation_form()
+	{
+		// if(!empty($_POST)){
+				
+		// }
 
- 		die(json_encode(array('ajaxModel' => True, 'error' => '1', 'message' => array('type' => 'error', 'content' => '<div>'))));
- 	}
+		die(json_encode(array('ajaxModel' => True, 'error' => '1', 'message' => array('type' => 'error', 'content' => '<div>'))));
+	}
 
- 	function add()
- 	{
+	function add()
+	{
 
- 	}
+	}
 
- 	function search_suggestion()
- 	{
-		$suggestions = array('hampster',
-		'rabbit',
-		'cat',
-		'dog',
-		'gerbal',
-		'mouse',
-		'rat',
-		'ferret',
-		'turtle',
-		'snake',
-		'lissard',
-		'fish',
-		'hampster',
-		'rabbit',
-		'cat',
-		'dog',
-		'hampster',
-		'rabbit',
-		'cat',
-		'dog',
-		'gerbal',
-		'mouse',
-		'rat',
-		'gerbil',
-		'mouse',
-		'rat',
-		'bird',
-		'frog',
-		'tortise',
-		'terrapin',
-		'ant',
-		'worm',
-		'chamelon',
-		'mice',
-		'chinchilla',
-		'horse');
+	function search_suggestion()
+	{
+		$suggestions = array();
+		$products = $this->db->select("SELECT `name` FROM `product` WHERE `name` LIKE :query", array('query'=> '%'.$_POST['query'].'%'));
 
-		$input = preg_quote($_POST['query'], '~'); // don't forget to quote input string!
-		$result = preg_grep('~' . $input . '~', $suggestions);
-		die(json_encode(array_splice(array_unique($result), 0,6)));
- 		
- 	}
+		foreach ($products as $product) {
+			$pos = strpos(strtolower($product['name']), ' ' . strtolower($_POST['query']));
+			if($pos){
+				$suggestions[] = substr($product['name'], $pos);
+			} else {
+				$suggestions[] = $product['name'];
+			}
+		}
+		
+		die(json_encode(array_splice($suggestions, 0,6)));
+		
+	}
 }
 ?>

@@ -16,6 +16,7 @@ function Parallax(scrollers, imageshift,speed, scrollerHeight) {
 			element.parentNode.style.height = scrollerHeight + "px"
 		}
 		element.style.webkitTransform = "translate3d(0px, 0px, 0px)";
+		element.style.width = "100%";
 	}
 	this.speed = 0.5
 	if(!empty(speed)){

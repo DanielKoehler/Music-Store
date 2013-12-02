@@ -1,74 +1,99 @@
 window.onload = function () {
-	dkInterfaceAddheaderListeners();
 	dkInterfaceAddListeners();	
 }
 
-function dkInterfaceAddheaderListeners(){
+function dkInterfaceAddListeners(){
+
 	// Listen for search transition finished.
 	var searchButton = document.getElementById('navigation-container').getElementsByClassName('search-button')[0];
 	searchButton.addEventListener('webkitTransitionEnd', function(event){if(hasClass(searchButton, 'open')){searchInput.focus();}});
 	// Listen for search click.
-	searchButton.addEventListener('click', function (event){	
-		searchClick(event, searchButton)		
-	});
+	if(!hasAttr(searchButton,'data-dkInterface')){
+		searchButton.setAttribute('data-dkInterface','event')
+		searchButton.addEventListener('click', function (event){	
+			searchClick(event, searchButton)		
+		});
+	}
 
 	var intellitype = document.getElementById("intellitype");
 	var searchInput = document.getElementById('navbar-search');
 	// Listen for choice of suggestions, and to fetch suggestions.
-	searchInput.addEventListener('keyup', function(event){
-		searchKeyup(event, searchInput, searchButton, intellitype)
-	});
+	if(!hasAttr(searchInput,'data-dkInterface')){
+		searchInput.setAttribute('data-dkInterface','event')
+		searchInput.addEventListener('keyup', function(event){
+			searchKeyup(event, searchInput, searchButton, intellitype)
+		});
+	}
+	// We use .input class for passing any given data.
+	var ajaxAnchor = document.getElementsByClassName('ajax-handled-anchor');
+	for (var i = ajaxAnchor.length - 1; i >= 0; i--) { //
+		if(!hasAttr(ajaxAnchor[i],'data-dkInterface')){
+			ajaxAnchor[i].setAttribute('data-dkInterface','event')
+			ajaxAnchor[i].addEventListener('click', function (event){		
+				ajaxAnchorClick(event, searchButton)	
+			});	
+		}
+	};
 
 	// We use .input class for passing any given data.
-	var ajaxAnchor = document.getElementById('navigation-container').getElementsByClassName('ajax-handled-anchor');
-	for (var i = ajaxAnchor.length - 1; i >= 0; i--) { //
-		ajaxAnchor[i].addEventListener('click', function (event){		
-			ajaxAnchorClick(event, searchButton)	
-		});	
+	var alerts = document.getElementsByClassName('alert-message-close');
+	for (var i = alerts.length - 1; i >= 0; i--) { //
+		if(!hasAttr(alerts[i],'data-dkInterface')){
+			alerts[i].setAttribute('data-dkInterface','event')
+			alerts[i].addEventListener('click', function (event){		
+				alertCloseClick(event)	
+			});	
+		}
 	};
-}
 
-function dkInterfaceAddListeners(){
 	// Switches Listener and JS handler
 	var switches = document.getElementsByClassName('switch');
 	for (var i = switches.length - 1; i >= 0; i--) { //
-		switches[i].addEventListener('click', function (event){
-			switchClick(event)
-		});
+		if(!hasAttr(switches[i],'data-dkInterface')){
+			switches[i].setAttribute('data-dkInterface','event')
+			switches[i].addEventListener('click', function (event){
+				switchClick(event)
+			});
+		}
 	};
 
 	var fullWindowHeightElements = document.getElementsByClassName('full-window-height');
 	for (var i = fullWindowHeightElements.length - 1; i >= 0; i--) { 
-		fullWindowHeightElements[i].style.minHeight = window.innerHeight - 171 + "px"
+		if(!hasAttr(fullWindowHeightElements[i],'data-dkInterface')){
+			fullWindowHeightElements[i].setAttribute('data-dkInterface','setting')
+			fullWindowHeightElements[i].style.minHeight = window.innerHeight - 146 + "px"
+		}
 	};
 
 	var tileNav = document.getElementsByClassName('smooth-navigation-next');
 	for (var i = tileNav.length - 1; i >= 0; i--) { //
-		tileNav[i].addEventListener('click', function (event){		
-			scrollNextClick(event)
-		});
+		if(!hasAttr(tileNav[i],'data-dkInterface')){
+			tileNav[i].setAttribute('data-dkInterface','event')
+			tileNav[i].addEventListener('click', function (event){		
+				scrollNextClick(event)
+			});
+		}
 	};
 
 	var tileNav = document.getElementsByClassName('smooth-navigation-top');
 	for (var i = tileNav.length - 1; i >= 0; i--) { //
-		tileNav[i].addEventListener('click', function (event){		
-			smoothScrollTo(0)
-		});
+		if(!hasAttr(tileNav[i],'data-dkInterface')){
+			tileNav[i].setAttribute('data-dkInterface','event')
+			tileNav[i].addEventListener('click', function (event){		
+				smoothScrollTo(0)
+			});
+		}
 	};
 
 	// We use .input class for passing any given data.
 	var ajaxForms = document.getElementsByClassName('ajax-action-handled-form');
 	for (var i = ajaxForms.length - 1; i >= 0; i--) { //
-		ajaxForms[i].addEventListener('submit', function (event){		
-			ajaxFormSubmit(event)
-		});	
-	};
-
-	var ajaxAnchor = document.getElementById('main-page').getElementsByClassName('ajax-handled-anchor');
-	for (var i = ajaxAnchor.length - 1; i >= 0; i--) { //
-		ajaxAnchor[i].addEventListener('click', function (event){		
-			ajaxAnchorClick(event)	
-		});	
+		if(!hasAttr(ajaxForms[i],'data-dkInterface')){
+			ajaxForms[i].setAttribute('data-dkInterface','event')
+			ajaxForms[i].addEventListener('submit', function (event){		
+				ajaxFormSubmit(event)
+			});	
+		}
 	};
 }
 
@@ -145,7 +170,7 @@ function searchKeyup(event, searchInput, searchButton, intellitype){
 		break;
 	}
 
-	if(!empty(searchInput.value) && fetching == 0 && storedString != searchInput.value){
+	if(!empty(searchInput.value) && fetching == 0 && storedString != searchInput.value && searchInput.value != ""){
 		
 		fetching = 1
 		storedString = searchInput.value
@@ -157,13 +182,13 @@ function searchKeyup(event, searchInput, searchButton, intellitype){
 		}
 
 		function fetchSuggestions(){
-			ajax('/ajax/search_suggestion.html', {'query':searchInput.value},function(suggestions){
+			ajax('./index.php?c=ajax&m=search_suggestion', {'query':searchInput.value},function(suggestions){
 				
 				intellitype.innerHTML = "";
 
 				for (var key in suggestions){
 				    anchorTag = document.createElement("a");
-				    anchorTag.href = "/store/search.html?query=" + suggestions[key];
+				    anchorTag.href = "./index.php?c=store&m=search&query=" + suggestions[key];
 				    anchorTag.appendChild(document.createTextNode(suggestions[key])); 
 					intellitype.appendChild(anchorTag);
 				}
@@ -174,7 +199,14 @@ function searchKeyup(event, searchInput, searchButton, intellitype){
 				}
 			})
 		}
+		return true;
 	}
+
+	if(empty(searchInput.value)){
+		searchButton.style.overflow = "hidden";
+		intellitypeOpen = 0
+	}
+	return true;
 }
 
 function scrollNextClick(event){
@@ -204,6 +236,13 @@ function switchClick(event){
 	}
 }
 
+function alertCloseClick(event){
+	var message = parentOfType(event.target, 'div');
+	fadeOut(message, function (){
+		message.parentNode.removeChild(message);
+	})
+}
+
 function ajaxFormSubmit(event){
 	event.preventDefault();
 	var formData = {}
@@ -223,16 +262,56 @@ function ajaxFormSubmit(event){
 	}
 }
 
-function ajaxEncodedActions(client){
+function ajaxEncodedActions(res){
 	// Location
 	// Error
 	// Message
-	if(client.location.state != "stay"){
+	client = res.ajax
+	
+	if(empty(client))
+		return false
+
+	if(client.location.state != "stay" && client.location != "stay"){
 		if(client.location.mode == 'full'){
 			replaceMainPageFromURL(client.location.address, 1); // Full reload
 		} else {
 			replaceMainPageFromURL(client.location.address); // Partial reload
 		}
+	}
+
+	if(!empty(client.message)){
+		for (var i = client.message.length - 1; i >= 0; i--) {
+			console.log(client.message)
+			if(!empty(client.message[i].type) && !empty(client.message[i].content)){
+			    
+				var previous = document.querySelector('.message-' + client.message[i].type);
+
+				if(previous != null){
+					message = previous;
+			   		message.innerHTML = "";
+			    } else {
+			    	message = document.createElement("div");
+			    	message.className = "message message-" + client.message[i].type
+			    }
+
+			    message.style.opacity = 0
+			  	content = document.createElement("p");
+			  	content.appendChild(document.createTextNode(client.message[i].content))
+			  	close = document.createElement("a");
+			  	close.className = 'alert-message-close';
+			  	close.innerHTML = '<i class="fa fa-times-circle"></i>';
+			  	close.setAttribute('data-dkInterface','event')
+				close.addEventListener('click', function (event){		
+					alertCloseClick(event)	
+				});	
+			  	message.appendChild(close)
+			  	message.appendChild(content)
+
+			  	if(previous == null)
+					document.body.insertBefore(message, document.getElementById('main-page'));
+				fadeIn(message)
+			}
+		};
 	}
 }
 
@@ -247,10 +326,56 @@ function ajaxAnchorClick(event, searchButton){
 	if(hasAttr(event.target, 'data-activate'))
 		addClass(document.getElementById(event.target.getAttribute('data-activate')).parentNode, 'active');
 
-	replaceMainPageFromURL(event.target.getAttribute('href'))
-	
+	if(hasClass(event.target, 'full-refresh')){	
+		replaceMainPageFromURL(event.target.getAttribute('href'), 1)
+	} else {
+		replaceMainPageFromURL(event.target.getAttribute('href'))
+	}
+
 	if(hasClass(searchButton, 'open')){
 		searchButton.style.overflow = "hidden";
 		removeClass(searchButton, 'open');	
 	}
+}
+
+function replaceMainPageFromURL(url, full){ // full 1 or 0, replace header and main-page or just main-page 
+
+	if(full == 1){fadeOut(document.getElementById('navigation-container'))}
+	fadeOut(document.getElementById('main-page'))
+
+	ajax(url, {}, function (page){
+		var temp = document.createElement("div")
+		temp.innerHTML = page
+		var mainPage = temp.querySelector('div[id=main-page]')
+		
+		if(mainPage){
+			var title = temp.querySelector('title')
+			document.title = title.innerHTML
+			window.history.pushState(null, title.innerHTML, url);
+
+			document.getElementById('main-page').innerHTML = mainPage.innerHTML;
+
+			if(full == 1){
+				var navigationContainer = temp.querySelector('div[id=navigation-container]')
+				document.getElementById('navigation-container').innerHTML = navigationContainer.innerHTML;
+				fadeIn(document.getElementById('navigation-container'))
+			}
+
+			dkInterfaceAddListeners()
+
+			// Lets re-evaluate the scripts we may have loaded. 
+			scripts = mainPage.querySelectorAll('script')
+			for (var i = scripts.length - 1; i >= 0; i--) {
+				eval(scripts[i].innerHTML)
+			};
+
+		} else {
+			document.getElementById('main-page').innerHTML = '<div class="container padded"><p class="centre">Sorry, somesthing went wrong, please try opening the link in a new tab.</p></div>';
+		}
+		
+		// Clear the current temp.
+		temp = "";
+
+		fadeIn(document.getElementById('main-page'))
+	}, 0);
 }

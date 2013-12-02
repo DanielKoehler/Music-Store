@@ -2,8 +2,9 @@ body, html, div, h1, h2, h3, h4, h5, p, li, ul {
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	font-weight: 200;
 	outline: none;
-	font-family:  'Nixie One', cursive;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 @-webkit-keyframes navigation-unread {
@@ -20,13 +21,75 @@ body, html, div, h1, h2, h3, h4, h5, p, li, ul {
 	100% { opacity: 0; }
 }
 
-*.unselectable, .intellitype {
+*.unselectable, #intellitype {
    -moz-user-select: -moz-none;
    -khtml-user-select: none;
    -webkit-user-select: none;
    -ms-user-select: none;
    user-select: none;
 }
+
+
+
+
+/* Message/Alert element styles ----------- */
+
+body > div.message:first-of-type {
+    margin-top: 15px;
+}
+
+.message {
+	width: 800px;
+    padding: 15px;
+    margin: 0 auto;
+    border-radius:10px;
+	margin-bottom: 15px;
+}
+
+.message a {
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.message a.alert-message-close {
+	float: right;
+	cursor:pointer;
+}
+
+.message-success {
+    background: rgba(46, 204, 113, 0.4);
+    border: 1px solid #27ae60;
+}
+
+
+.message-information {
+    background: rgba(52, 152, 219, 0.4);
+    border: 1px solid #2980B9;
+}
+
+.message-error {
+    background: rgba(231, 76, 60, 0.4);
+    border: 1px solid #c0392b;
+}
+
+.message-warning {
+    background: rgba(241, 196, 15, 0.4);
+    border: 1px solid #f1c40f;
+}
+
+.message a.alert-message-close:hover {
+	opacity: 0.6;
+}
+
+.message-success p, .message-success a {color: #106856;}
+
+.message-information p, .message-information a {color: #2980B9;}
+
+.message-warning p, .message-warning a {color: #B6940E;}
+
+.message-error p, .message-error a {color: #B32A1C;}
+
+
 
 /* Switch element styles ----------- */
 
@@ -547,7 +610,6 @@ form.styled input:-ms-input-placeholder {
 
 .navigation {
 	width: 100%;
-	padding-bottom: 25px;
 	height: 146px;
 }
 
@@ -573,6 +635,7 @@ form.styled input:-ms-input-placeholder {
 	position: relative;
 	display: table;
 	height: 50px;
+	-webkit-transition: background-color 1s;
 }
 
 .navigation ul.navigation-bar > li:first-child > a {
@@ -580,11 +643,11 @@ form.styled input:-ms-input-placeholder {
 }
 
 
-.navigation ul.navigation-bar.right > li:last-child > a {
+.styled-nav.navigation ul.navigation-bar.right > li:last-child > a {
 	border-radius: 0 6px 6px 0;
 }
 
-.navigation ul.navigation-bar.right > li > a {
+.styled-nav.navigation ul.navigation-bar.right > li > a {
 	border-right: 2px solid #2c3e50;
 	border-left:0;
 	border-radius: 0;
@@ -607,9 +670,9 @@ form.styled input:-ms-input-placeholder {
 	line-height: 100%;
 }
 
-.navigation ul.navigation-bar > li > a {
+.styled-nav.navigation ul.navigation-bar > li > a {
 	color:#fff;
-	font-weight: 400;
+	font-weight: 100;
 	padding: 0 21px;
 	font-size: 16px;
 	line-height: 50px;
@@ -761,7 +824,8 @@ form.styled input:-ms-input-placeholder {
 
 .navigation ul.navigation-bar > li > ul > li > a {
 	white-space: nowrap;
-	color: #fff; font-weight: 700;  text-decoration: none; 
+	color: #fff; 
+	font-weight: 100;  text-decoration: none; 
 	width: 100%;
 	top: 0;
 	left: 5px; 
@@ -858,6 +922,9 @@ form.styled input:-ms-input-placeholder {
     text-decoration: none;
     color: #000;
     line-height:20px;
+    white-space: nowrap;
+  	overflow: hidden;
+  	text-overflow: ellipsis;
     height: 20px;
     -webkit-transition: background-color 0.2s ease;
 }
@@ -892,3 +959,30 @@ form.styled input:-ms-input-placeholder {
 	top: -8px;
 	right: -8px;
 }
+
+.navigation.plain ul li ul li {
+    color: #fff;
+    white-space: nowrap;
+    cursor:pointer
+}
+
+.navigation.plain ul li ul li:hover {
+    color: #ecf0f1;
+}
+
+.navigation.plain > ul > li:hover > a.button-styled {
+	color: #9b59b6;
+	border: 1px solid #9b59b6;
+}
+
+.navigation.plain > ul > li > a.button-styled {
+    display: inline-block;
+    width: 78px;
+    height: 40px;
+    background: #ecf0f1;
+    border: 1px solid #34495e;
+    line-height: 40px;
+    border-radius: 6px;
+}
+
+

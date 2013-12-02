@@ -1,3 +1,22 @@
+<div class="message message-success">
+	<a class="alert-message-close"><i class="fa fa-times-circle"></i></a>
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices magna magna, at tempor risus placerat sed. Quisque eros odio, interdum et tellus a, consequat sodales ligula.</p>
+</div>
+
+<div class="message message-information">
+	<a class="alert-message-close"><i class="fa fa-times-circle"></i></a>
+	<p>Would you like to <a href="./index.php?c=user&amp;m=settings">link</a> your account with Gravitar?</a>
+</div>
+
+<div class="message message-warning">
+	<a class="alert-message-close"><i class="fa fa-times-circle"></i></a>
+	<p>Invalid username or password</p>
+</div>
+
+<div class="message message-error">
+	<a class="alert-message-close"><i class="fa fa-times-circle"></i></a>
+	<p>Some error</p>
+</div>
 <div id="main-page">	
 	<div class="scroller-content full-window-height">
 			<div class="container vertical-perent-js-centring">
@@ -21,7 +40,7 @@
 			</div>
 	</div>
 	<div class="scroller-back-layer-container">
-			<img src="/assets/images/scroller/image1.jpg" id="first-image">->
+			<img src="4542297929_c25ee7495e_o.jpg" id="first-image"> <!-- Creative Commons-licensed (http://creativecommons.org/licenses/by-sa/2.0/), Source: http://www.flickr.com/photos/doug88888/4542297929/ Rights: @Doug88888 -->
 	</div>
 	<div class="scroller-content inverted">
 			<div class="container padded">
@@ -47,7 +66,7 @@
 			</div>
 	</div>
 	<div class="scroller-back-layer-container">
-			<img src="/assets/images/scroller/image2.jpg" id="second-image">
+			<img src="857436_704149772929171_2112921418_o.jpg" id="second-image">
 	</div>
 	<div class="scroller-content">
 			<div class="container padded">
@@ -61,7 +80,7 @@
 			</div>
 	</div>
 	<div class="scroller-back-layer-container">
-			<img src="/assets/images/scroller/image3.jpg"  id="third-image">
+			<img src="3270245319_9cbb998c4e_b.jpg"  id="third-image">
 	</div>
 	<div class="scroller-content inverted">
 			<div class="container padded">
@@ -159,7 +178,7 @@
 		});
 		
 		// Start my Paralex 'class', god the no frameworks rule, I so wish I could have used 
-		parallax = new Parallax(['first-image','second-image','third-image','forth-image'],450,0.5, 450);
+		parallax = new Parallax(['first-image','second-image','third-image','forth-image'],20,0.5, 450);
 		parallax.start()
 
 		//MOVE TO OWN UI JS LIB
