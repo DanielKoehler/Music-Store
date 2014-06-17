@@ -3,7 +3,7 @@ Music Store
 
 Cardiff Univeristy Coursework project, comprising an basic MVC framework built in PHP.
 
-Restrictions<sup>1<sup>
+Restrictions
 ============
 
 Restrictions for this project are:
