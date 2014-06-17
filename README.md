@@ -1,7 +1,7 @@
-RiverCrossingAdventureStore
+Music Store
 ===========================
 
-Cardiff Univeristy Coursework project centred around selling the awesome open source game "River Crossing Adventure!", admittedly a questionable business model.
+Cardiff Univeristy Coursework project, comprising an basic MVC framework built in PHP.
 
 Restrictions<sup>1<sup>
 ============
@@ -12,8 +12,6 @@ Restrictions for this project are:
 <li>Can't use any third party frameworks</li>
 <li>Must use PHP</li>
 </ol>
-
-<sup>1. Shamelessly stolen from <a href="https://github.com/KiranPanesar">Kiran Panesar</a></sup>
 
 Creative Commons-licensed content sources
 =========================================
